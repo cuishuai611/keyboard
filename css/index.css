@@ -16,4 +16,4 @@ button{width:4rem;height:.8rem;background-color:#26AE0E;border-radius:0.1rem;dis
 .btnhide i{transform:rotate(90deg);font-style:normal;font-size:.4rem;font-weight:bold;display:inline-block;font-family:normal;}
 .keyvalue li{width:2.47rem;float:left;height:1.3rem;border-top:1px solid #e1e1e1;border-right:1px solid #e1e1e1;text-align:center;font-size:.65rem;line-height:1.49rem;}
 .keyvalue li:nth-child(3n){border-right:none;width:2.5rem;}
-.keyvalue li.nokey{background-color:#e1e1e1;}
+.keyvalue li.nokey{background-color:#e1e1e1}
