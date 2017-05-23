@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>移动端自定义键盘</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body style='height:2000px'>
+    <button onclick="ShowKey('.passContainer','.key','.pass','ceshi.php')">立即支付</button>
+	<div class="passContainer">
+		<div class="passBox">
+			<input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''>
+		</div>
+		<div class='keyboard'>
+			<div class='btnhide'><i>></i></div>
+			<ul class='keyvalue clearfix'>
+				<li class='key'>1</li>
+				<li class='key'>2</li>
+				<li class='key'>3</li>
+				<li class='key'>4</li>
+				<li class='key'>5</li>
+				<li class='key'>6</li>
+				<li class='key'>7</li>
+				<li class='key'>8</li>
+				<li class='key'>9</li>
+				<li class='nokey'></li>
+				<li class='key'>0</li>
+				<li class='deleteKey nokey'>X</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script>
+/*设置DOM根节点字体*/
+function htmlfonts(){
+	var owidth = document.documentElement.clientWidth || document.body.clientWidth,
+	    obHtml = document.getElementsByTagName('html')[0];   
+	owidth=Math.min(owidth,750);
+	var htmlfonts=(owidth/750)*100;
+	obHtml.style.fontSize = htmlfonts+'px';
+}
+htmlfonts();
+window.onresize = function(){
+	htmlfonts();
+}
+
+function ShowKey(C,K,P,URL){
+	var c = document.querySelector(C),
+	    k = document.querySelectorAll(K),
+	    p = document.querySelectorAll(P);
+
+	c.addEventListener('touchmove',function(e){
+		e.preventDefault();
+	},false);
+
+	var kb = {
+		//初始化自定义键盘
+		init : function(){
+			c.style.top = 0;
+			for(var i=0; i<k.length; i++){
+				k[i].onclick = function(){ kb.writeKey(this); }
+			}
+		}(),
+		//输入密码
+		writeKey : function(o){
+			var v = o.innerText, m = '';
+			for(var i = 0; i < p.length; i++){
+				if(p[i].value == ''){
+					p[i].value = v;
+					if(i == p.length-1){
+						for(var j = 0; j < p.length; j++){
+							m += p[j].value;
+						}
+					}else{
+					    return;
+					}
+				}
+			}
+			if(m != ''){
+				kb.ajaxFun({
+					Data : [{key:'zfpass',val:m}],
+					Url : URL
+				})
+			}
+		},
+		//异步请求
+		ajaxFun : function(c){    //配置项（Type：传输类型，Url:提交路径，Data：传输数据）
+			var r = new XMLHttpRequest();
+			c.Type = c.Type == undefined ? 'POST' : c.Type;
+			if(c.Type == 'POST'){
+				r.open(c.Type,c.Url,true);
+				r.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+				for(var i = 0; i < c.Data.length; i++){
+					r.send(c.Data[i].key+'='+c.Data[i].val);
+				}
+			}
+			r.onreadystatechange = function(){
+				if(r.readyState == 4 && r.status == 200){
+					var rg = r.responseText;
+					if(rg == 'correct'){
+						kb.ShowEsg('执行表单提交');
+					}else if(rg == 'error'){
+						kb.ShowEsg('密码错误');
+					}else{
+						kb.ShowEsg('网络参数错误');
+					}
+				}
+			}
+		},
+		//删除密码
+		deleteKey : function(){
+			var del = document.querySelector('.deleteKey');
+			del.onclick = function(){
+				for(var i = p.length-1; i >= 0; i--){
+					if(p[i].value != ''){
+						p[i].value = '';
+						return;
+					}
+				}
+			}
+		}(),
+		//弹层模块
+		ShowEsg : function(obj){
+			var mylayer = document.createElement('span'), BodyNode = document.getElementsByTagName('body')[0];
+			mylayer.setAttribute('class','mylayer');
+			mylayer.innerHTML = obj;
+			BodyNode.appendChild(mylayer);
+			var ml = document.querySelector('.mylayer'), mW = ml.offsetWidth, mH = ml.offsetHeight, t=null;
+			ml.style.opacity = 1;
+			ml.style.marginLeft = -(mW/2)+'px';
+			ml.style.marginTop = -(mH/2)+'px';
+			t = setTimeout(function(){
+				BodyNode.removeChild(ml);
+				clearTimeout(t);
+			},2000);
+		}
+	}
+}
+</script>
+</html>
