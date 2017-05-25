@@ -5,7 +5,22 @@ input{border:none;font-family:"microsoft Yahei","Helvetica";}
 ul,li{list-style:none;}
 .clearfix:after{clear:both;content:'';display:block;height:0;overflow:hidden;}
 
-.mylayer{color:#fff;opacity:0;padding:.25rem .33rem;font-size:.2rem;background:rgba(21,160,245,0.5);border-radius:.1rem;position:fixed;top:50%;left:50%;transition:opacity 0.2s linear;z-index:9999;}
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1495683624347'); /* IE9*/
+  src: url('iconfont.eot?t=1495683624347#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1495683624347') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1495683624347') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1495683624347#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-del:before { content: "\e613";   font-size:.65rem;}
+
+.mylayer{color:#fff;opacity:0;padding:.25rem .33rem;font-size:.3rem;background:rgba(21,160,245,0.7);border-radius:.1rem;position:fixed;top:50%;left:50%;transition:opacity 0.2s linear;z-index:9999;}
 button{width:4rem;height:.8rem;background-color:#26AE0E;border-radius:0.1rem;display:block;margin:2rem auto;color:#fff;font-size:.3rem;border:none}
 .passContainer{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);top:100%;transition:top ease 0.3s;}
 .passBox{position:absolute;margin:auto;top:3rem;text-align:center;right:0;left:0;}
