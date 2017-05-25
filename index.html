@@ -10,12 +10,12 @@
     <button onclick="ShowKey('.passContainer','.key','.pass','ceshi.php')">立即支付</button>
 	<div class="passContainer">
 		<div class="passBox">
-			<input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
-         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
-         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
-         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
-         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''><!--
-         --><input type='password' readonly="readonly" class='pass' maxlength='1' value=''>
+			<input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''><!--
+         --><input type='password' readonly="readonly" unselectable="on" onfocus="this.blur()" class='pass' maxlength='1' value=''>
 		</div>
 		<div class='keyboard'>
 			<div class='btnhide'><i>></i></div>
@@ -139,7 +139,7 @@ function ShowKey(C,K,P,URL){
 			mylayer.innerHTML = obj;
 			BodyNode.appendChild(mylayer);
 			var ml = document.querySelector('.mylayer'), mW = ml.offsetWidth, mH = ml.offsetHeight, t=null;
-			ml.style.cssText = "opacity:1;margin-left:"+"-"+(mW/2)+"px;margin-top:"+"-"+(mH/2)+"px";
+			ml.style.cssText = "opacity:1;margin-left:-"+(mW/2)+"px;margin-top:-"+(mH/2)+"px";
 			t = setTimeout(function(){
 				BodyNode.removeChild(ml);
 				clearTimeout(t);
