@@ -57,7 +57,6 @@ window.onresize = function(){
 *  ShowKey(键盘整体容器，键盘数值类名，密码表单类名，提交验证密码地址)
 */
 
-
 function ShowKey(C,K,P,URL){
 	var c = document.querySelector(C),
 	    k = document.querySelectorAll(K),
@@ -140,9 +139,7 @@ function ShowKey(C,K,P,URL){
 			mylayer.innerHTML = obj;
 			BodyNode.appendChild(mylayer);
 			var ml = document.querySelector('.mylayer'), mW = ml.offsetWidth, mH = ml.offsetHeight, t=null;
-			ml.style.opacity = 1;
-			ml.style.marginLeft = -(mW/2)+'px';
-			ml.style.marginTop = -(mH/2)+'px';
+			ml.style = "opacity:1;margin-left:"+(-mW/2)+"px;margin-top:"+(-mH/2)+"px";
 			t = setTimeout(function(){
 				BodyNode.removeChild(ml);
 				clearTimeout(t);
